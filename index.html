@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>facebook</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <div id="head">
+        <div class="header">
+            <li class="fb">
+                <a href="a">facebook</a>
+            </li>
+            <form class="bio">
+                <li>Email or Phone<br>
+                    <input type="text" name="" id="email"><br>
+                    <label id="letter1">Enter atleast 8 letters</label><br id="br1">
+                    <input type="checkbox" name="">
+                    <a href="a">Keep me logged in</a>
+                </li>
+                <li>Password<br>
+                    <input type="password" name="" id="password"><br>
+                    <label id="letter2">Password requires more than 8 letters</label><br id="br2">
+                    <a href="a">Forgot your password?</a>
+                </li>
+                <li>
+                    <input type="button" value="Log In" id="submit">
+                </li>
+            </form>
+        </div>
+    </div>
+    <div id="bottom">
+        <div class="b">
+            <p>Facebook helps you connect and share with the people in your life</p><br><br>
+            <img src="image/fbimg.png" alt="">
+        </div>
+        <div class="c">
+            <h4>Create an account</h4>
+            <p>It's free and always will be</p>
+            <li>
+                <input type="text" placeholder="First Name" id="fname" style="width: 49%;">
+
+                <input type="text" placeholder="Last Name" id="lname" class="l" style="position: absolute; width: 14%;
+                margin-left:0px;">
+                <label id="letter3">Please enter your First name minimum 3 characters</label>
+                <label id="letter4">First name and last name is same not allowed</label>
+
+            </li>
+
+            <li>
+                <input type="email" placeholder="Your Email" id="yemail">
+                <label id="letter5">Enter your email atleast 5 characters</label>
+            </li>
+            <li>
+                <input type="password" placeholder="New Password" id="npswd">
+                <label id="letter6">Your password must be atleast 6 characters</label>
+            </li>
+            <li>
+                <input type="password" placeholder="Confirm your password " id="cpswd">
+                <label id="letter7">Re-enter your Password correctly</label>
+            </li>
+            <p>Birthday</p>
+            <li>
+                <select>
+                    <option id="day">Day</option>
+                </select>
+                <select>
+                    <option id="month">Month</option>
+                </select>
+                <select>
+                    <option id="year">Year</option>
+                </select>&nbsp;
+                <a href="a">Why do i need to provide my <br>birthday?</a>
+            </li>
+            <li>
+                <input type="radio" class="d" id="female">Female
+                <input type="radio" class="d" id="male">Male
+                <!-- <label id="letter8">select your gender</label> -->
+            </li>
+
+            <li class="e">
+                By clicking Sign Up, you agree to our terms and that you have <br>read our Data Use Policy, including
+                our Cookie Use.
+            </li>
+            <li>
+                <input type="button" value="Sign Up" id="signup"><br>
+                <hr style="margin-top: 0px;">
+            </li>
+
+            <li class="create">
+                <a href="a">Create a Page for a celebrity, band or business.</a>
+            </li>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#email").blur(function () {
+            var text = $(this).val()
+            if (text.length < 6) {
+                $("#letter1").show()
+            }
+            else {
+                $("#letter1").hide()
+            }
+        })
+        $("#password").blur(function () {
+            var pswdtext = $(this).val()
+            if (pswdtext.length <= 8) {
+                $("#letter2").show()
+            }
+            else {
+                $("#letter2").hide()
+            }
+        })
+        $("#submit").click(function () {
+            let email = $("#email").val();
+            let password = $("#password").val();
+            if (email === "" && password === "") {
+                $("#letter1").show()
+                $("#letter2").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Please Enter a valid email and password.'
+                });
+            }
+            else if (email.length < 6) {
+                $("#letter1").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Please Enter a valid email.'
+                });
+            }
+            else if (password.length <= 8) {
+                $("#letter2").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Please Enter a valid password.'
+                });
+            }
+            else {
+                swal.fire({
+                    icon: 'success',
+                    title: 'Submitted Successfully',
+                    html: 'Mail id:' + $("#email").val()
+                });
+            }
+        });
+        $("#fname").blur(function () {
+            var fname = $(this).val();
+            if (fname.length < 3) {
+                $("#letter3").show()
+            }
+            else {
+                $("#letter3").hide()
+            }
+        })
+        $("#lname").blur(function () {
+            var lname = $(this).val();
+            let fname = $("#fname").val();
+            if (lname === fname) {
+                $("#letter4").show()
+            }
+            else {
+                $("#letter4").hide()
+            }
+        })
+        $("#yemail").blur(function () {
+            var yemail = $(this).val()
+            if (yemail.length < 5) {
+                $("#letter5").show()
+            }
+            else {
+                $("#letter5").hide()
+            }
+        })
+        $("#npswd").blur(function () {
+            var npswd = $(this).val()
+            if (npswd.length <= 6) {
+                $("#letter6").show()
+            }
+            else {
+                $("#letter6").hide()
+            }
+        })
+
+        $("#cpswd").blur(function () {
+            let npswd = $("#npswd").val();
+            let cpswd = $("#cpswd").val();
+            if (cpswd != npswd) {
+                $("#letter7").show()
+            }
+            else if (cpswd === npswd) {
+                $("#letter7").hide()
+            }
+        })
+        $("#male").click(function () {
+            $("#male").prop("checked", true);
+            $("#female").prop("checked", false);
+        })
+        $("#female").click(function () {
+            $("#female").prop("checked", true);
+            $("#male").prop("checked", false);
+        })
+        // $("#male").mouseover(function(){
+        //     let male=$("#male").prop("checked", false);
+        //     let female=$("#female").prop("checked", false);
+        //     if(male===female){
+        //         $("#letter8").show()
+        //     }
+        // })
+        $("#signup").click(function () {
+            let fname = $("#fname").val();
+            let yemail = $("#yemail").val();
+            let npswd = $("#npswd").val();
+            let cpswd = $("#cpswd").val();
+            if (fname === "" && yemail === "" && npswd === "" && cpswd === "") {
+                $("#letter3").show()
+                $("#letter5").show()
+                $("#letter6").show()
+                $("#letter7").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Blank spaces are not allowed.'
+                });
+            }
+            else if (fname.length < 3) {
+                $("#letter3").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Blank spaces are not allowed.'
+                });
+            }
+            else if (yemail.length < 5) {
+                $("#letter5").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Blank spaces are not allowed.'
+                });
+            }
+            else if (npswd.length <= 6) {
+                $("#letter6").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Blank spaces are not allowed.'
+                });
+            }
+            else if (npswd != cpswd) {
+                $("#letter7").show()
+                swal.fire({
+                    icon: 'error',
+                    title: 'Submission Failed',
+                    text: 'Blank spaces are not allowed.'
+                });
+            }
+            else {
+                swal.fire({
+                    icon: 'success',
+                    title: 'Submitted Successfully',
+                    html: 'Thank You ' + $("#fname").val()
+                });
+            }
+        })
+    });
+</script>
+
+</html>
